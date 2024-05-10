@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:value_listener/modal/items.dart';
 
-class FanDetailWidget extends StatelessWidget {
+class LedDetailWidget extends StatelessWidget {
   final DataItems item;
   final void Function(String) onDelete;
-  const FanDetailWidget({
+  const LedDetailWidget({
     super.key,
     required this.item,
     required this.onDelete,

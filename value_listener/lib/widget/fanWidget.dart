@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:value_listener/modal/items.dart';
 import 'package:value_listener/screen/FanDetailScreen.dart';
 
 class FanWidget extends StatefulWidget {
@@ -10,6 +11,16 @@ class FanWidget extends StatefulWidget {
 
 class _FanWidgetState extends State<FanWidget> {
   int fanCount = 3; // Initially, no fans
+  List<DataItems> fans = [
+    DataItems(id: "1", name: "Quạt 1", room: "Phòng ngủ"),
+    DataItems(id: "2", name: "Quạt trần", room: "Phòng khách"),
+    DataItems(id: "3", name: "Quạt treo tường", room: "Phòng ngủ"),
+  ];
+  void updateFanCount(int newCount) {
+    setState(() {
+      fanCount = newCount;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +32,10 @@ class _FanWidgetState extends State<FanWidget> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Image.asset(height: 100, 'images/fan2.png'),
+            Image.asset(
+              'images/fan2.png',
+              height: 100,
+            ),
             const SizedBox(
               width: 20,
             ),
@@ -36,13 +50,19 @@ class _FanWidgetState extends State<FanWidget> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => FanDetailScreen()),
+                        builder: (context) => FanDetailScreen(
+                          fans: fans, // Pass the list of fans
+                          updateFanCount: updateFanCount,
+                        ),
+                      ),
                     );
                   },
                   child: const Text('View details'),
                 ),
-                const Text('Manage Fans',
-                    style: TextStyle(fontSize: 24, color: Colors.white)),
+                const Text(
+                  'Manage Fans',
+                  style: TextStyle(fontSize: 24, color: Colors.white),
+                ),
               ],
             ),
           ],

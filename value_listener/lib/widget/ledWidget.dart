@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:value_listener/modal/items.dart';
 import 'package:value_listener/screen/LedDetailScreen.dart';
 
-class LightWidget extends StatefulWidget {
-  const LightWidget({super.key});
+class LedWidget extends StatefulWidget {
+  const LedWidget({super.key});
 
   @override
-  _LightWidgetState createState() => _LightWidgetState();
+  _LedWidgetState createState() => _LedWidgetState();
 }
 
-class _LightWidgetState extends State<LightWidget> {
-  int lightCount = 1; // Initially, no lights
+class _LedWidgetState extends State<LedWidget> {
+  int ledCount = 2; // Initially, no LEDs
+  List<DataItems> lights = [
+    DataItems(id: "1", name: "Đèn trần", room: "Phòng khách"),
+    DataItems(id: "2", name: "Đèn chùm", room: "Phòng ngủ"),
+  ];
+
+  void updateLightCount(int newCount) {
+    setState(() {
+      ledCount = newCount;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +32,17 @@ class _LightWidgetState extends State<LightWidget> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Image.asset(height: 100, 'images/light2.png'),
+            Image.asset(
+              'images/light2.png',
+              height: 100,
+            ),
             const SizedBox(
               width: 20,
             ),
             Column(
               children: [
                 Text(
-                  'Number of Lights: $lightCount',
+                  'Number of Lights: $ledCount',
                   style: const TextStyle(fontSize: 15, color: Colors.white),
                 ),
                 ElevatedButton(
@@ -36,13 +50,19 @@ class _LightWidgetState extends State<LightWidget> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => LightDetailScreen()),
+                        builder: (context) => LightDetailScreen(
+                          lights: lights, // Pass the list of LEDs
+                          updateLightCount: updateLightCount,
+                        ),
+                      ),
                     );
                   },
                   child: const Text('View details'),
                 ),
-                const Text('Manage Lights',
-                    style: TextStyle(fontSize: 24, color: Colors.white)),
+                const Text(
+                  'Manage Lights',
+                  style: TextStyle(fontSize: 24, color: Colors.white),
+                ),
               ],
             ),
           ],

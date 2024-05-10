@@ -12,7 +12,7 @@ import 'package:value_listener/widget/temperatureWidget.dart';
 const server = 'io.adafruit.com';
 const port = '1883';
 const username = 'thorfinn0330';
-const password = 'aio_UEta97eLz6XfdRourh0NGhkHE2N7';
+const password = 'aio_dOWI18oQA6Hq7I94WG3fBdiqRebj';
 const topics = [
   'thorfinn0330/feeds/cambien1',
   'thorfinn0330/feeds/cambien2',
@@ -232,6 +232,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           },
                           valueListenable: _insensityValue,
                         ),
+                        const SizedBox(width: 30),
                       ],
                     ),
                   ),
@@ -247,7 +248,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       color: const Color.fromARGB(126, 174, 231, 245)),
                   child: Column(
                     children: [
-                      const LightWidget(),
+                      const LedWidget(),
                       SwitchScreen(
                         text: "Đèn",
                         topic: "thorfinn0330/feeds/nutnhan1",
